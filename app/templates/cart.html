@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+{% block title %}Cart - MBShopping{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="mb-4">Your Shopping Cart</h1>
+    
+    {% if cart_items %}
+    <div class="row">
+        {% for item in cart_items %}
+        <div class="col-12 mb-4">
+            <div class="card shadow-sm">
+                <div class="row g-0">
+                    <!-- Product Image -->
+                    <div class="col-md-3">
+                        <img src="{{ url_for('static', filename='images/product-item-' ~ loop.index ~ '.jpg') }}" 
+                             class="img-fluid rounded-start" 
+                             alt="{{ item.product_name }}">
+                    </div>
+                    
+                    <div class="col-md-9">
+                        <div class="card-body">
+                            <div class="row align-items-center">
+                                <!-- Product Info -->
+                                <div class="col-md-6">
+                                    <h5 class="card-title">{{ item.product_name }}</h5>
+                                    <p class="text-muted">$95.00</p>
+                                </div>
+                                
+                                <!-- Quantity Controls -->
+                                <div class="col-md-4">
+                                    <div class="input-group">
+                                        <button class="btn btn-outline-secondary" type="button">-</button>
+                                        <input type="text" class="form-control text-center" 
+                                               value="{{ item.quantity }}" 
+                                               aria-label="Quantity">
+                                        <button class="btn btn-outline-secondary" type="button">+</button>
+                                    </div>
+                                </div>
+                                
+                                <!-- Remove Button -->
+                                <div class="col-md-2 text-end">
+                                    <button class="btn btn-danger">
+                                        <i class="bi bi-trash"> Remove</i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    
+    <!-- Checkout Section -->
+    <div class="card shadow-sm mt-4">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>Order Summary</h5>
+                    <dl class="row">
+                        <dt class="col-6">Subtotal:</dt>
+                        <dd class="col-6 text-end">$95.00</dd>
+                        <dt class="col-6">Shipping:</dt>
+                        <dd class="col-6 text-end">$15.00</dd>
+                        <dt class="col-6">Total:</dt>
+                        <dd class="col-6 text-end fw-bold">$110.00</dd>
+                    </dl>
+                </div>
+                <div class="col-md-6 text-end">
+                    <button class="btn btn-success btn-lg">
+                        Checkout <i class="bi bi-credit-card"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <div class="alert alert-info" role="alert">
+        <h4 class="alert-heading">Your cart is empty!</h4>
+        <p>Start shopping to add items to your cart.</p>
+    </div>
+    {% endif %}
+    
+    <div class="mt-4">
+        <a href="{{ url_for('main.home') }}" class="btn btn-primary">
+            <i class="bi bi-arrow-left"></i> Continue Shopping
+        </a>
+    </div>
+</div>
+{% endblock %}

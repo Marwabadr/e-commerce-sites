@@ -1,0 +1,160 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <!-- New Collections Section -->
+  <section id="new-collections" class="py-5">
+    <div class="container">
+      <div class="row justify-content-center">
+        <h1 class="section-title text-center mt-4 aos-init aos-animate" data-aos="fade-up">New Collections</h1>
+        <div class="col-md-6 text-center aos-init aos-animate" data-aos="fade-up" data-aos-delay="300">
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe voluptas ut dolorum consequuntur, adipisci
+            repellat! Eveniet commodi voluptatem voluptate, eum minima, in suscipit explicabo voluptatibus harum,
+            quibusdam ex repellat eaque!</p>
+        </div>
+      </div>
+
+      <!-- Image Gallery -->
+      <div class="row mt-5">
+        <!-- Banner Image 1 -->
+        <div class="col-md-4 mb-4 aos-init aos-animate" data-aos="fade-up" data-aos-delay="400">
+          <div class="image-holder">
+            <img src="{{ url_for('static', filename='images/banner-image-1.jpg') }}" alt="Banner 1" class="img-fluid">
+          </div>
+        </div>
+
+        <!-- Banner Image 2 -->
+        <div class="col-md-4 mb-4 aos-init aos-animate" data-aos="fade-up" data-aos-delay="500">
+          <div class="image-holder">
+            <img src="{{ url_for('static', filename='images/banner-image-2.jpg') }}" alt="Banner 2" class="img-fluid">
+          </div>
+        </div>
+
+        <!-- Banner Image 3 -->
+        <div class="col-md-4 mb-4 aos-init aos-animate" data-aos="fade-up" data-aos-delay="600">
+          <div class="image-holder">
+            <img src="{{ url_for('static', filename='images/banner-image-3.jpg') }}" alt="Banner 3" class="img-fluid">
+          </div>
+        </div>
+
+        <!-- Banner Image 4 -->
+        <div class="col-md-4 mb-4 aos-init aos-animate" data-aos="fade-up" data-aos-delay="700">
+          <div class="image-holder">
+            <img src="{{ url_for('static', filename='images/banner-image-4.jpg') }}" alt="Banner 4" class="img-fluid">
+          </div>
+        </div>
+
+        <!-- Banner Image 5 -->
+        <div class="col-md-4 mb-4 aos-init aos-animate" data-aos="fade-up" data-aos-delay="800">
+          <div class="image-holder">
+            <img src="{{ url_for('static', filename='images/banner-image-5.jpg') }}" alt="Banner 5" class="img-fluid">
+          </div>
+        </div>
+
+        <!-- Banner Image 6 -->
+        <div class="col-md-4 mb-4 aos-init aos-animate" data-aos="fade-up" data-aos-delay="900">
+          <div class="image-holder">
+            <img src="{{ url_for('static', filename='images/banner-image-6.jpg') }}" alt="Banner 6" class="img-fluid">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Shop Categories Section -->
+  <section id="shop-categories" class="py-5">
+    <div class="container">
+      <div class="row">
+        <!-- Shop for Men -->
+        <div class="col-md-4 mb-4">
+          <div class="category-item text-center">
+            <div class="image-holder">
+              <img src="{{ url_for('static', filename='images/cat-item1.jpg') }}" alt="Shop for Men" class="img-fluid">
+            </div>
+            <div class="category-content mt-3">
+              <h3 class="category-title">SHOP FOR MEN</h3>
+              <a href="{{ url_for('product.shop_men') }}" class="btn btn-dark">SHOP NOW</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Shop for Women -->
+        <div class="col-md-4 mb-4">
+          <div class="category-item text-center">
+            <div class="image-holder">
+              <img src="{{ url_for('static', filename='images/cat-item2.jpg') }}" alt="Shop for Women" class="img-fluid">
+            </div>
+            <div class="category-content mt-3">
+              <h3 class="category-title">SHOP FOR WOMEN</h3>
+              <a href="{{ url_for('product.shop_women') }}" class="btn btn-dark">SHOP NOW</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Shop Accessories -->
+        <div class="col-md-4 mb-4">
+          <div class="category-item text-center">
+            <div class="image-holder">
+              <img src="{{ url_for('static', filename='images/cat-item3.jpg') }}" alt="Shop Accessories" class="img-fluid">
+            </div>
+            <div class="category-content mt-3">
+              <h3 class="category-title">SHOP ACCESSORIES</h3>
+              <a href="{{ url_for('product.shop_accessories') }}" class="btn btn-dark">SHOP NOW</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Our New Arrivals Section -->
+  <section id="new-arrivals" class="py-5">
+    <div class="container">
+      <!-- Section Header -->
+      <div class="d-flex flex-wrap justify-content-between align-items-center mb-5">
+        <h2 class="section-title text-uppercase">OUR NEW ARRIVALS</h2>
+        <a href="{{ url_for('product.all_products') }}" class="btn-link">VIEW ALL PRODUCTS</a>
+      </div>
+
+      <!-- Product Grid -->
+      <div class="row">
+        {% for product in products %}
+          <!-- Product Item -->
+          <div class="col-md-3 mb-4">
+            <div class="product-item">
+              <div class="image-holder">
+                <img src="{{ url_for('static', filename=product.image) }}" alt="{{ product.name }}" class="img-fluid">
+              </div>
+              <div class="product-content text-center mt-3">
+                <h5 class="product-name">{{ product.name }}</h5>
+                <p class="product-price">${{ product.price }}</p>
+                <!-- Heart and Cart Icons -->
+                <div class="product-icons d-flex justify-content-center gap-3">
+                  <!-- Add to Wishlist Form -->
+                  <form action="{{ url_for('main.add_to_wishlist', product_name=product.name | urlencode) }}" method="POST" style="display: inline;">
+                    <input type="hidden" name="product_name" value="{{ product.name }}">
+                    <button type="submit" class="icon-link" style="border: none; background: none; cursor: pointer;">
+                      <svg width="24" height="24" viewBox="0 0 24 24">
+                        <use xlink:href="#heart"></use>
+                      </svg>
+                    </button>
+                  </form>
+
+                  <!-- Add to Cart Form -->
+
+                  <form action="{{ url_for('main.add_to_cart', product_name=product.name | urlencode) }}" method="POST" style="display: inline;">
+                    <input type="hidden" name="product_id" value="{{ product.id }}">
+                    <button type="submit" class="icon-link" style="border: none; background: none; cursor: pointer;">
+                      <svg width="24" height="24" viewBox="0 0 24 24">
+                        <use xlink:href="#cart"></use>
+                      </svg>
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+{% endblock %}

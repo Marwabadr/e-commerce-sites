@@ -1,0 +1,127 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <!-- Logo -->
+    <a class="navbar-brand" href="{{ url_for('main.home') }}">
+      MBShopping
+    </a>
+
+    <!-- Toggle Button for Mobile -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Navbar Links -->
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <!-- Home -->
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{{ url_for('main.home') }}">HOME</a>
+        </li>
+
+        <!-- Shop Dropdown -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownShop" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            SHOP
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownShop">
+            <li><a class="dropdown-item" href="#">Shop for men</a></li>
+            <li><a class="dropdown-item" href="#">Shop for women</a></li>
+            <li><a class="dropdown-item" href="#">Shop for accessories</a></li>
+          </ul>
+        </li>
+
+        <!-- Blog -->
+        <li class="nav-item">
+          <a class="nav-link" href="#">BLOG</a>
+        </li>
+
+        <!-- Pages Dropdown -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPages" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            PAGES
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownPages">
+            <li><a class="dropdown-item" href="#">About</a></li>
+            <li><a class="dropdown-item" href="#">Cart</a></li>
+            <li><a class="dropdown-item" href="#">Checkout</a></li>
+            <li><a class="dropdown-item" href="#">Contact</a></li>
+          </ul>
+        </li>
+
+        <!-- Blog (Duplicate) -->
+        <li class="nav-item">
+          <a class="nav-link" href="#">BLOG</a>
+        </li>
+
+        <!-- Contact -->
+        <li class="nav-item">
+          <a class="nav-link" href="#">CONTACT</a>
+        </li>
+      </ul>
+
+   <!-- Right Side Icons -->
+<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+  {% if current_user.is_authenticated %}
+   <!-- Wishlist -->
+   <li class="nav-item d-none d-lg-block">
+    <a class="nav-link" href="{{ url_for('main.view_wishlist') }}">
+      WISHLIST 
+    </a>
+  </li>
+  <li class="nav-item d-lg-none">
+    <a class="nav-link" href="{{ url_for('main.view_wishlist') }}">
+      <svg width="24" height="24" viewBox="0 0 24 24">
+        <use xlink:href="#heart"></use>
+      </svg>
+    </a>
+  </li>
+
+  <!-- Cart -->
+  <li class="nav-item d-none d-lg-block">
+    <a class="nav-link" href="{{ url_for('main.view_cart') }}">
+      CART 
+    </a>
+  </li>
+  <li class="nav-item d-lg-none">
+    <a class="nav-link" href="{{ url_for('main.view_cart') }}">
+      <svg width="24" height="24" viewBox="0 0 24 24">
+        <use xlink:href="#cart"></use>
+      </svg>
+    </a>
+  </li>
+
+   
+    <!-- Logout -->
+    <li class="nav-item">
+      <a class="nav-link" href="{{ url_for('auth.logout') }}">
+        LOGOUT
+      </a>
+    </li>
+  {% else %}
+    <!-- Login -->
+    <li class="nav-item">
+      <a class="nav-link" href="{{ url_for('auth.login') }}">
+        LOGIN
+      </a>
+    </li>
+
+    <!-- Register -->
+    <li class="nav-item">
+      <a class="nav-link" href="{{ url_for('auth.register') }}">
+        REGISTER
+      </a>
+    </li>
+  {% endif %}
+
+  <!-- Search Icon -->
+  <li class="nav-item">
+    <a class="nav-link" href="#">
+      <svg width="24" height="24" viewBox="0 0 24 24">
+        <use xlink:href="#search"></use>
+      </svg>
+    </a>
+  </li>
+</ul>
+    </div>
+  </div>
+</nav>

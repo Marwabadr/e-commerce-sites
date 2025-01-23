@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="split-container">
+        <!-- Left Side: Form -->
+        <div class="form-container">
+            <h1>Register</h1>
+            <p>Create an account</p>
+            <form action="{{ url_for('auth.register') }}" method="POST">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <div class="form-group">
+                    <label for="confirm_password">Confirm Password</label>
+                    <input type="password" id="confirm_password" name="confirm_password" required>
+                </div>
+                <button type="submit" class="login-button">REGISTER</button>
+            </form>
+            <div class="register-link">
+                Already have an account? <a href="{{ url_for('auth.login') }}">Login</a>
+            </div>
+        </div>
+
+        <!-- Right Side: Image -->
+        <div class="image-container">
+            <img src="{{ url_for('static', filename='images/login.jpeg') }}" alt="Background Image">
+        </div>
+    </div>
+{% endblock %}

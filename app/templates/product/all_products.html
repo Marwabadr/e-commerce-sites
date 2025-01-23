@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <section id="all-products" class="py-5">
+    <div class="container">
+      <h1 class="section-title text-center">All Products</h1>
+      <div class="row">
+        {% for product in products %}
+          <div class="col-md-3 mb-4">
+            <div class="product-item">
+              <div class="image-holder">
+                <img src="{{ url_for('static', filename='images/' + product.image) }}" alt="{{ product.name }}" class="img-fluid">
+              </div>
+              <div class="product-content text-center mt-3">
+                <h5 class="product-name">{{ product.name }}</h5>
+                <p class="product-price">${{ product.price }}</p>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+{% endblock %}

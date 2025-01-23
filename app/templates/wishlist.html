@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}Wishlist - MBShopping{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="mb-4">Your Wishlist</h1>
+    
+    {% if wishlist_items %}
+    <div class="row">
+        {% for item in wishlist_items %}
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 shadow-sm">
+                <!-- Product Image -->
+                <img src="{{ url_for('static', filename='images/product-item-' ~ loop.index ~ '.jpg') }}" 
+                     class="card-img-top" 
+                     alt="{{ item.product_name }}">
+                <div class="card-body">
+                    <!-- Product Name -->
+                    <h5 class="card-title">{{ item.product_name }}</h5>
+                    
+                    <!-- Product Price (if available) -->
+                    <p class="text-muted">$95.00</p>
+                    
+                    <!-- Action Buttons -->
+                    <div class="d-grid gap-2">
+                        <a href="#" class="btn btn-outline-danger">
+                            <i class="bi bi-heartbreak"></i> Remove
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="alert alert-info" role="alert">
+        <h4 class="alert-heading">Your wishlist is empty!</h4>
+        <p>Start adding items you love to your wishlist.</p>
+    </div>
+    {% endif %}
+    
+    <div class="mt-4">
+        <a href="{{ url_for('main.home') }}" class="btn btn-primary">
+            <i class="bi bi-arrow-left"></i> Continue Shopping
+        </a>
+    </div>
+</div>
+{% endblock %}
